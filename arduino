@@ -1,0 +1,165 @@
+#include <Servo.h>
+
+Servo myservo;
+const int in1 = 6;  
+const int in2 = 5;  
+const int enA =  4;
+
+const int trigPin = 9;  // Trigger pin
+const int echoPin = 10; // Echo pin
+
+void setup() {
+   // pinMode(enA, OUTPUT);
+ // pinMode(in1, OUTPUT);
+ // pinMode(in2, OUTPUT);
+
+  myservo.attach(8);
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+   myservo.write(95);
+   delay(500);
+}
+
+void loop() {
+  long duration, distance;
+
+  // Generate a 10us pulse on the trigger pin to start the measurement
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Measure the pulse on the echo pin
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculate the distance in centimeters
+  distance = (duration / 2) / 29.1;
+
+  // Print the distance to the serial monitor
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  delay(500); 
+  
+
+ if (distance <= 7){
+ 
+delay(3000);
+
+ digitalWrite(in1, LOW);
+   digitalWrite(in2, HIGH);
+   analogWrite(enA, 255);
+    delay(3000);
+
+ myservo.write(0);
+    delay(1000);
+
+digitalWrite(in1, HIGH);
+   digitalWrite(in2,LOW);
+   analogWrite(enA, 255);
+ delay(2000);
+
+digitalWrite(in1, LOW);
+   digitalWrite(in2,LOW);
+   analogWrite(enA, 0);
+
+ myservo.write(90);
+ delay(3000);
+ 
+     
+
+ }
+
+//     if (distance <= 7) {
+
+//       digitalWrite(in1, HIGH);
+//   digitalWrite(in2, LOW);
+//   analogWrite(enA, 255);
+ 
+//  delay(6000);
+
+//   digitalWrite(in1, LOW);
+//   digitalWrite(in2, LOW);
+//   analogWrite(enA, 0);
+//   delay(4000);
+
+//     // Rotate the servo 90 degrees in one direction
+    
+//     myservo.write(0);  // Adjust the angle as needed
+//     delay(3000); 
+    
+    
+//     digitalWrite(in1, LOW);
+//     digitalWrite(in2, HIGH);
+//     analogWrite(enA, 255); 
+//     delay(2000);
+
+//      digitalWrite(in1, LOW);
+//   digitalWrite(in2, LOW);
+//   analogWrite(enA, 0);
+//   delay(4000);
+
+    
+    
+//      // Wait for the servo to reach the desired position
+    
+//     // Return the servo to its initial position
+//     myservo.write(90); 
+//     delay(2000);
+
+      
+    
+//      // Return to initial position (adjust as needed)
+   
+//        // Wait for the servo to reach the initial position
+    
+//     // You can add additional actions here if needed
+//   }
+  
+//   if (distance <= 13 && distance >7) {
+//     digitalWrite(in1, HIGH);
+//   digitalWrite(in2, LOW);
+//   analogWrite(enA, 255);
+ 
+//  delay(6000);
+
+//   digitalWrite(in1, LOW);
+//   digitalWrite(in2, LOW);
+//   analogWrite(enA, 0);
+//   delay(4000);
+
+//     // Rotate the servo 90 degrees in one direction
+    
+//     myservo.write(180);  // Adjust the angle as needed
+//     delay(3000); 
+    
+    
+//     digitalWrite(in1, LOW);
+//     digitalWrite(in2, HIGH);
+//     analogWrite(enA, 255); 
+//     delay(2000);
+
+//      digitalWrite(in1, LOW);
+//   digitalWrite(in2, LOW);
+//   analogWrite(enA, 0);
+//   delay(4000);
+
+    
+    
+//      // Wait for the servo to reach the desired position
+    
+//     // Return the servo to its initial position
+//     myservo.write(90); 
+//     delay(2000);
+//  // Rotate the servo 90 degrees in one direction
+    
+//      // Wait for the servo to reach the initial position
+    
+//     // You can add additional actions here if needed
+//   } // Delay for 1 second before the next measurement
+  // Delay for 1 second before the next measurement
+  // Delay for 1 second before the next measurement
+}
